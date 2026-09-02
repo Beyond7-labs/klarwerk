@@ -7,3 +7,6 @@ out/
 .vercel/
 .DS_Store
 *.log
+.claude/launch.json
+tsconfig.tsbuildinfo
+next-env.d.ts

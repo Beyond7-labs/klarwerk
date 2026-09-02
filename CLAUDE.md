@@ -12,12 +12,13 @@ Es ist ein fiktives Produkt mit echtem Code. Es entsteht für einen Onlinekurs (
 
 | Baustein | Entscheidung | Status |
 |---|---|---|
-| Framework | Next.js, App Router, JavaScript oder TypeScript | offen: TS empfohlen |
-| Datenbank | Postgres bei Neon, Region Frankfurt (EU) | gesetzt |
-| Anmeldung | per E-Mail, jede Person kann sich registrieren und einen Mandanten anlegen oder per Einladung beitreten | offen: Magic Link vs. Passwort |
+| Framework | Next.js 16, App Router, TypeScript, Drizzle ORM | gesetzt |
+| Datenbank | Postgres bei Neon, Region Frankfurt (EU), als Vercel-Marketplace-Ressource `klarwerk-db` am Vercel-Projekt | gesetzt |
+| Anmeldung | E-Mail und Passwort (bcrypt, Sitzung als httpOnly-Cookie). Jede Person kann eine Agentur anlegen oder per Einladungslink beitreten. Einladungen werden als Link erzeugt, kein Mailversand | gesetzt (Magic Link später möglich, braucht Mailanbieter) |
 | Hosting | Vercel, Team `beyond7products` | gesetzt |
 | Styling | CSS-Variablen aus `STYLEGUIDE.md`, keine UI-Bibliothek mit eigenem Look | gesetzt |
 | Analytics | nur Vercel Web Analytics, kein weiteres Tracking | gesetzt |
+| Lizenz | MIT | gesetzt |
 
 ## Regeln
 
@@ -33,24 +34,23 @@ Es ist ein fiktives Produkt mit echtem Code. Es entsteht für einen Onlinekurs (
 
 Deploy nur aus diesem Ordner. Vor jedem Vercel-Befehl `.vercel/project.json` prüfen: die `orgId` muss zum Team `beyond7products` gehören. Kein `vercel link` auf ein anderes Team.
 
-## Start hier (für die Bau-Session)
+## Stand und Arbeitsweise
 
-**Was schon existiert:**
-- `STYLEGUIDE.md`: die CI, bindend.
-- `design/referenz-shell-und-onboarding-variante-a.html`: ein klickbarer Prototyp vom 28.08.2026. **Nutze daraus die Shell** (Sidebar, Kopfzeile, Karten, Auswahlkarten, Buttons, Tokens hell/dunkel) als visuelle Referenz für das Produkt. **Baue den Onboarding-Wizard darin nicht nach**, das ist Variante A einer Kursfrage, die im Produkt bewusst offen bleibt (Regel 4). Live als Artifact: https://claude.ai/code/artifact/b8700156-4ea1-4a8d-b8e6-74e42fe58ea1
-- Es gibt kein weiteres Produkt. Alles ab hier ist neu.
+**Gebaut (02.09.2026):** Meilensteine 1 bis 5. Shell, Anmeldung, Einladung, Module Projekte (Boards), Kunden, Zeiten, Auslastung, Einstellungen, Impressum, Datenschutz. Deploy im Vercel-Team `beyond7products`, Projekt `klarwerk`.
 
-**Zuerst klären, dann bauen** (Antworten in die Stack-Tabelle oben eintragen):
-1. TypeScript oder JavaScript (Empfehlung: TypeScript)
-2. Anmeldung: Magic Link oder Passwort (Empfehlung: Magic Link)
-3. Lizenz des öffentlichen Repos (offen; MIT, falls Teilnehmer klonen und weiterbauen sollen)
+**Ordner:**
+- `app/` Seiten. `(auth)` Anmelden, Registrieren, Einladung. `(app)` alles hinter dem Login mit der Shell im Layout. `(legal)` Impressum, Datenschutz.
+- `components/ui/` alle UI-Bausteine, je Datei ein Kopfkommentar mit Zweck, Props, Beispiel. `index.ts` exportiert alles.
+- `app/globals.css` Tokens (hell/dunkel) und Komponentenklassen. Keine UI-Bibliothek.
+- `db/schema.ts` Datenmodell (Drizzle), `db/index.ts` Client (Neon HTTP).
+- `lib/auth.ts` Sitzungen, `lib/data.ts` lesende Abfragen, `lib/actions.ts` Server Actions, `lib/format.ts` Datum, Dauer, Labels.
+- `scripts/seed.ts` Demo-Mandant Agentur Nordlicht, per `pnpm db:seed` zurücksetzbar.
+- `design/` Prototyp-Referenz vom 28.08.2026 (Shell übernommen, Wizard bewusst nicht).
 
-**Meilensteine in dieser Reihenfolge:**
-1. Next.js-Scaffold mit Shell im Klarwerk-Look, Seed-Daten Agentur Nordlicht, lokal lauffähig
-2. Postgres bei Neon (Frankfurt), Datenmodell: Mandant, Nutzer:in, Einladung, Projekt, Aufgabe, Kunde, Zeiteintrag
-3. Anmeldung und Einladung, Mandant anlegen oder beitreten
-4. Module Projekte (Boards), Kunden, Zeiten, Auslastung in dieser Reihenfolge, jeweils schmal
-5. Impressum und Datenschutz, dann Vercel-Deploy im Team `beyond7products`, Registrierung öffnen
-6. Screenshots der Live-Instanz nach `~/Desktop/klarwerk-pm/produkt/screenshots/`
+**Befehle:** `pnpm dev` (lokal), `pnpm build`, `pnpm db:push` (Schema in Neon), `pnpm db:seed`. Env-Variablen: `vercel env pull .env.local`.
 
-Der Kurs braucht Meilenstein 1 bis 3 und ein sichtbares Modul Projekte. Der Rest ist Kür.
+**Demo-Zugang:** `tessa.mahler@agentur-nordlicht.de` / `nordlicht2026`, oder auf der Anmeldeseite „Demo-Agentur Nordlicht öffnen".
+
+**Onboarding (Regel 4) konkret:** Neue Agentur, erster Login, `/projekte` zeigt eine Karte „Noch keine Projekte" mit einem Satz und dem Button „Neues Projekt". Sonst nichts. Das bleibt so.
+
+**Offen (Kür):** Screenshots der Live-Instanz nach `~/Desktop/klarwerk-pm/produkt/screenshots/`, Drag-and-drop auf dem Board, Konto löschen in der Oberfläche.

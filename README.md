@@ -8,7 +8,7 @@ Es entsteht als „bestehendes Produkt" für den t3n-Onlinekurs **Prototyping f�
 
 ## Ausprobieren
 
-Live: [klarwerk.vercel.app](https://klarwerk.vercel.app)
+Live: [klarwerk-theta.vercel.app](https://klarwerk-theta.vercel.app)
 
 Demo-Agentur „Agentur Nordlicht" mit vier Personen, fünf Kunden, fünf Projekten und drei Wochen Zeiteinträgen:
 

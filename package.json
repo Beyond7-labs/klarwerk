@@ -27,5 +27,13 @@
     "drizzle-kit": "^0.31.10",
     "tsx": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

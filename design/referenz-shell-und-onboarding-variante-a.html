@@ -1,0 +1,457 @@
+<title>Klarwerk Onboarding</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #F9F7F3;
+    --surface:    #FFFFFF;
+    --surface-2:  #F2EFE8;
+    --ink:        #1B2A4A;
+    --ink-soft:   #5A6479;
+    --ink-faint:  #8B93A5;
+    --line:       #E3DFD6;
+    --brass:      #A8761F;
+    --brass-soft: #F0E4CB;
+    --teal:       #2E7D7B;
+    --shadow:     0 1px 2px rgba(27,42,74,.06), 0 8px 24px rgba(27,42,74,.07);
+    --radius:     10px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #121A2B;
+      --surface:    #1A2335;
+      --surface-2:  #212B40;
+      --ink:        #EBE8E1;
+      --ink-soft:   #9BA4B6;
+      --ink-faint:  #6E7891;
+      --line:       #2C3750;
+      --brass:      #D6A44B;
+      --brass-soft: #332C1C;
+      --teal:       #55A8A5;
+      --shadow:     0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #121A2B;
+    --surface:    #1A2335;
+    --surface-2:  #212B40;
+    --ink:        #EBE8E1;
+    --ink-soft:   #9BA4B6;
+    --ink-faint:  #6E7891;
+    --line:       #2C3750;
+    --brass:      #D6A44B;
+    --brass-soft: #332C1C;
+    --teal:       #55A8A5;
+    --shadow:     0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .proto-flag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    background: var(--brass-soft);
+    color: var(--brass);
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .proto-flag span:last-child {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+  .proto-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--brass); flex: none;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 216px 1fr;
+    min-height: calc(100vh - 38px);
+  }
+
+  /* ---------- Sidebar ---------- */
+  .side {
+    background: var(--ink);
+    color: #E8E4DA;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  :root[data-theme="dark"] .side,
+  :root:not([data-theme="light"]) .side { background: #0D1422; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .side { background: var(--ink); }
+  }
+
+  .brand {
+    display: flex; align-items: baseline; gap: 8px;
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 19px; letter-spacing: -.02em;
+    color: #FFFFFF;
+    padding: 0 8px;
+  }
+  .brand em {
+    font-style: normal; color: #D6A44B;
+  }
+
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 7px;
+    color: #A9B2C4; text-decoration: none; font-size: 14px;
+  }
+  .nav a:hover { background: rgba(255,255,255,.06); color: #E8E4DA; }
+  .nav a[aria-current="page"] { background: rgba(214,164,75,.15); color: #FFFFFF; font-weight: 500; }
+  .nav a:focus-visible { outline: 2px solid #D6A44B; outline-offset: 1px; }
+  .glyph { width: 15px; text-align: center; opacity: .8; font-size: 13px; }
+
+  .side-foot {
+    margin-top: auto; padding: 0 10px;
+    font-size: 12px; color: #6E7891; line-height: 1.45;
+  }
+
+  /* ---------- Main ---------- */
+  .main { display: flex; flex-direction: column; min-width: 0; }
+
+  .top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 14px 26px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .top h1 {
+    margin: 0;
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-size: 17px; font-weight: 600; letter-spacing: -.01em;
+  }
+  .avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--teal); color: #fff;
+    display: grid; place-items: center;
+    font-size: 12px; font-weight: 600; flex: none;
+  }
+
+  .canvas { padding: 30px 26px 56px; }
+
+  /* ---------- Wizard ---------- */
+  .wizard {
+    max-width: 720px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .steps {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  .step {
+    flex: 1; padding: 12px 16px;
+    display: flex; align-items: center; gap: 9px;
+    font-size: 13px; color: var(--ink-faint);
+    border-right: 1px solid var(--line);
+  }
+  .step:last-child { border-right: 0; }
+  .step[data-state="active"] { color: var(--ink); font-weight: 600; background: var(--surface); }
+  .step[data-state="done"] { color: var(--ink-soft); }
+  .step-num {
+    width: 20px; height: 20px; border-radius: 50%; flex: none;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 600;
+    border: 1px solid var(--line); background: var(--surface);
+    font-variant-numeric: tabular-nums;
+  }
+  .step[data-state="active"] .step-num { background: var(--brass); border-color: var(--brass); color: #fff; }
+  .step[data-state="done"] .step-num { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+  .panel { padding: 26px 24px 22px; }
+  .panel h2 {
+    margin: 0 0 6px;
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px; font-weight: 700; letter-spacing: -.02em;
+    text-wrap: balance;
+  }
+  .panel p.lede { margin: 0 0 20px; color: var(--ink-soft); max-width: 56ch; }
+
+  .choices { display: grid; gap: 9px; margin-bottom: 22px; }
+  .choice {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 13px 15px; text-align: left; width: 100%;
+    background: var(--surface); color: inherit;
+    border: 1px solid var(--line); border-radius: 8px;
+    font: inherit; cursor: pointer;
+    transition: border-color .12s, background .12s;
+  }
+  .choice:hover { border-color: var(--brass); background: var(--surface-2); }
+  .choice:focus-visible { outline: 2px solid var(--brass); outline-offset: 1px; }
+  .choice[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-soft); }
+  .choice-mark {
+    width: 17px; height: 17px; border-radius: 5px; flex: none; margin-top: 2px;
+    border: 1.5px solid var(--ink-faint); display: grid; place-items: center;
+    font-size: 11px; color: transparent;
+  }
+  .choice[aria-pressed="true"] .choice-mark { background: var(--brass); border-color: var(--brass); color: #fff; }
+  .choice b { display: block; font-weight: 600; font-size: 14px; }
+  .choice small { color: var(--ink-soft); font-size: 13px; }
+
+  .field { display: grid; gap: 6px; margin-bottom: 18px; max-width: 420px; }
+  .field label { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+  .field input {
+    padding: 9px 12px; font: inherit; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 7px;
+  }
+  .field input:focus-visible { outline: 2px solid var(--brass); outline-offset: 0; border-color: var(--brass); }
+
+  .actions { display: flex; align-items: center; gap: 12px; }
+  .btn {
+    padding: 9px 18px; font: inherit; font-weight: 600; font-size: 14px;
+    border-radius: 7px; border: 1px solid transparent; cursor: pointer;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  :root[data-theme="dark"] .btn-primary,
+  :root:not([data-theme="light"]) .btn-primary { background: var(--brass); color: #16110A; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .btn-primary { background: var(--ink); color: #F9F7F3; }
+  }
+  .btn-primary:hover { opacity: .9; }
+  .btn-ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .btn:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .skip {
+    margin-left: auto; font-size: 13px; color: var(--ink-faint);
+    background: none; border: 0; cursor: pointer; font: inherit; text-decoration: underline;
+  }
+  .skip:hover { color: var(--ink-soft); }
+
+  /* ---------- Board ---------- */
+  .board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 900px; }
+  .col {
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 12px; min-height: 230px;
+  }
+  .col h3 {
+    margin: 0 0 10px; font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .07em; color: var(--ink-soft);
+    display: flex; justify-content: space-between;
+  }
+  .col h3 span { font-variant-numeric: tabular-nums; color: var(--ink-faint); }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 7px; padding: 11px 12px; margin-bottom: 8px;
+    box-shadow: 0 1px 1px rgba(27,42,74,.04);
+  }
+  .card b { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 3px; }
+  .card small { color: var(--ink-soft); font-size: 12.5px; }
+  .tag {
+    display: inline-block; margin-top: 7px; padding: 2px 8px;
+    font-size: 11px; font-weight: 600; border-radius: 20px;
+    background: var(--brass-soft); color: var(--brass);
+  }
+  .tag[data-kind="teal"] { background: color-mix(in srgb, var(--teal) 14%, transparent); color: var(--teal); }
+
+  .empty {
+    display: grid; place-items: center; gap: 6px;
+    height: 150px; color: var(--ink-faint); font-size: 13px; text-align: center;
+  }
+
+  .done-note {
+    max-width: 900px; margin-bottom: 20px; padding: 12px 15px;
+    border-left: 3px solid var(--teal); background: var(--surface);
+    border-radius: 0 8px 8px 0; font-size: 14px; color: var(--ink-soft);
+  }
+  .done-note b { color: var(--ink); }
+
+  [hidden] { display: none !important; }
+
+  @media (max-width: 760px) {
+    .shell { grid-template-columns: 1fr; }
+    .side { flex-direction: row; align-items: center; gap: 14px; padding: 12px 16px; }
+    .side .nav { flex-direction: row; overflow-x: auto; }
+    .side-foot { display: none; }
+    .board { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; }
+    .step { border-right: 0; border-bottom: 1px solid var(--line); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="proto-flag">
+  <span class="proto-dot"></span>
+  <span>Prototyp</span>
+  <span>Variante A von 3 &middot; erkundend gebaut, kein Produktionsstand</span>
+</div>
+
+<div class="shell">
+  <aside class="side">
+    <div class="brand">Klar<em>werk</em></div>
+    <nav class="nav">
+      <a href="#" aria-current="page"><span class="glyph">◧</span>Projekte</a>
+      <a href="#"><span class="glyph">◔</span>Auslastung</a>
+      <a href="#"><span class="glyph">▤</span>Zeiten</a>
+      <a href="#"><span class="glyph">◇</span>Kunden</a>
+      <a href="#"><span class="glyph">⚙</span>Einstellungen</a>
+    </nav>
+    <div class="side-foot">Agentur Nordlicht<br>4 von 12 Plätzen belegt</div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <h1 id="viewTitle">Willkommen bei Klarwerk</h1>
+      <div class="avatar" aria-hidden="true">TM</div>
+    </div>
+
+    <div class="canvas">
+
+      <!-- Wizard -->
+      <section class="wizard" id="wizard" aria-labelledby="stepHeading">
+        <div class="steps" role="list">
+          <div class="step" role="listitem" data-step="1" data-state="active">
+            <span class="step-num">1</span> Womit arbeitet ihr
+          </div>
+          <div class="step" role="listitem" data-step="2">
+            <span class="step-num">2</span> Erstes Projekt
+          </div>
+          <div class="step" role="listitem" data-step="3">
+            <span class="step-num">3</span> Team einladen
+          </div>
+        </div>
+
+        <div class="panel" data-panel="1">
+          <h2 id="stepHeading">Was macht ihr am häufigsten?</h2>
+          <p class="lede">Wir richten das erste Board danach ein. Ändern lässt sich das jederzeit.</p>
+          <div class="choices">
+            <button class="choice" aria-pressed="false"><span class="choice-mark">✓</span><span><b>Kampagnen</b><small>Konzept, Produktion, Schaltung, Reporting</small></span></button>
+            <button class="choice" aria-pressed="true"><span class="choice-mark">✓</span><span><b>Website- und Relaunch-Projekte</b><small>Discovery, Design, Umsetzung, Livegang</small></span></button>
+            <button class="choice" aria-pressed="false"><span class="choice-mark">✓</span><span><b>Laufende Betreuung</b><small>Retainer mit wiederkehrenden Aufgaben</small></span></button>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" data-go="2">Weiter</button>
+            <button class="skip" data-skip>Überspringen</button>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="2" hidden>
+          <h2>Wie heißt euer erstes Projekt?</h2>
+          <p class="lede">Ein echtes Projekt aus dieser Woche funktioniert besser als ein Testeintrag.</p>
+          <div class="field">
+            <label for="projName">Projektname</label>
+            <input id="projName" type="text" value="Relaunch Hafenstadt Immobilien">
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" data-go="3">Weiter</button>
+            <button class="btn btn-ghost" data-go="1">Zurück</button>
+            <button class="skip" data-skip>Überspringen</button>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="3" hidden>
+          <h2>Wer arbeitet mit?</h2>
+          <p class="lede">Boards mit mindestens zwei Personen werden dreimal so oft weitergeführt.</p>
+          <div class="field">
+            <label for="invite">E-Mail-Adressen, mit Komma getrennt</label>
+            <input id="invite" type="text" value="jana@nordlicht.de, ben@nordlicht.de">
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" data-finish>Board erstellen</button>
+            <button class="btn btn-ghost" data-go="2">Zurück</button>
+            <button class="skip" data-skip>Später einladen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Board -->
+      <div id="boardWrap" hidden>
+        <div class="done-note" id="doneNote">
+          <b>Board angelegt.</b> Drei Spalten passend zu Website-Projekten, das Team ist eingeladen.
+        </div>
+        <div class="board">
+          <div class="col">
+            <h3>Diese Woche <span>2</span></h3>
+            <div class="card"><b>Kickoff-Termin bestätigen</b><small>Jana &middot; fällig Mittwoch</small><span class="tag">Discovery</span></div>
+            <div class="card"><b>Zugänge beim Kunden anfragen</b><small>Ben &middot; fällig Freitag</small><span class="tag">Discovery</span></div>
+          </div>
+          <div class="col">
+            <h3>In Arbeit <span>1</span></h3>
+            <div class="card"><b>Seitenstruktur entwerfen</b><small>Tobias</small><span class="tag" data-kind="teal">Design</span></div>
+          </div>
+          <div class="col">
+            <h3>Erledigt <span>0</span></h3>
+            <div class="empty"><span>Noch nichts abgeschlossen</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var wizard = document.getElementById('wizard');
+    var boardWrap = document.getElementById('boardWrap');
+    var viewTitle = document.getElementById('viewTitle');
+    var doneNote = document.getElementById('doneNote');
+
+    function show(step) {
+      wizard.querySelectorAll('[data-panel]').forEach(function (p) {
+        p.hidden = Number(p.dataset.panel) !== step;
+      });
+      wizard.querySelectorAll('.step').forEach(function (s) {
+        var n = Number(s.dataset.step);
+        s.dataset.state = n === step ? 'active' : (n < step ? 'done' : '');
+        if (n < step) s.querySelector('.step-num').textContent = '✓';
+        else s.querySelector('.step-num').textContent = String(n);
+      });
+    }
+
+    function finish(skipped) {
+      wizard.hidden = true;
+      boardWrap.hidden = false;
+      var name = document.getElementById('projName').value.trim() || 'Erstes Projekt';
+      viewTitle.textContent = name;
+      if (skipped) {
+        doneNote.innerHTML = '<b>Leeres Board angelegt.</b> Der geführte Einstieg lässt sich in den Einstellungen wieder starten.';
+      }
+    }
+
+    wizard.addEventListener('click', function (e) {
+      var choice = e.target.closest('.choice');
+      if (choice) {
+        wizard.querySelectorAll('.choice').forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
+        choice.setAttribute('aria-pressed', 'true');
+        return;
+      }
+      var go = e.target.closest('[data-go]');
+      if (go) { show(Number(go.dataset.go)); return; }
+      if (e.target.closest('[data-finish]')) { finish(false); return; }
+      if (e.target.closest('[data-skip]')) { finish(true); }
+    });
+  })();
+</script>

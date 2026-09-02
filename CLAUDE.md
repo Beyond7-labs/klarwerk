@@ -32,3 +32,25 @@ Es ist ein fiktives Produkt mit echtem Code. Es entsteht für einen Onlinekurs (
 ## Vercel
 
 Deploy nur aus diesem Ordner. Vor jedem Vercel-Befehl `.vercel/project.json` prüfen: die `orgId` muss zum Team `beyond7products` gehören. Kein `vercel link` auf ein anderes Team.
+
+## Start hier (für die Bau-Session)
+
+**Was schon existiert:**
+- `STYLEGUIDE.md`: die CI, bindend.
+- `design/referenz-shell-und-onboarding-variante-a.html`: ein klickbarer Prototyp vom 28.08.2026. **Nutze daraus die Shell** (Sidebar, Kopfzeile, Karten, Auswahlkarten, Buttons, Tokens hell/dunkel) als visuelle Referenz für das Produkt. **Baue den Onboarding-Wizard darin nicht nach**, das ist Variante A einer Kursfrage, die im Produkt bewusst offen bleibt (Regel 4). Live als Artifact: https://claude.ai/code/artifact/b8700156-4ea1-4a8d-b8e6-74e42fe58ea1
+- Es gibt kein weiteres Produkt. Alles ab hier ist neu.
+
+**Zuerst klären, dann bauen** (Antworten in die Stack-Tabelle oben eintragen):
+1. TypeScript oder JavaScript (Empfehlung: TypeScript)
+2. Anmeldung: Magic Link oder Passwort (Empfehlung: Magic Link)
+3. Lizenz des öffentlichen Repos (offen; MIT, falls Teilnehmer klonen und weiterbauen sollen)
+
+**Meilensteine in dieser Reihenfolge:**
+1. Next.js-Scaffold mit Shell im Klarwerk-Look, Seed-Daten Agentur Nordlicht, lokal lauffähig
+2. Postgres bei Neon (Frankfurt), Datenmodell: Mandant, Nutzer:in, Einladung, Projekt, Aufgabe, Kunde, Zeiteintrag
+3. Anmeldung und Einladung, Mandant anlegen oder beitreten
+4. Module Projekte (Boards), Kunden, Zeiten, Auslastung in dieser Reihenfolge, jeweils schmal
+5. Impressum und Datenschutz, dann Vercel-Deploy im Team `beyond7products`, Registrierung öffnen
+6. Screenshots der Live-Instanz nach `~/Desktop/klarwerk-pm/produkt/screenshots/`
+
+Der Kurs braucht Meilenstein 1 bis 3 und ein sichtbares Modul Projekte. Der Rest ist Kür.

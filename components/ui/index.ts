@@ -1,5 +1,5 @@
 /**
- * Sammelexport aller UI-Bausteine. Der Kurs-Ordner importiert von hier.
+ * Sammelexport aller UI-Bausteine. Prototypen importieren von hier.
  */
 export { Shell } from "./Shell";
 export { Sidebar } from "./Sidebar";

@@ -18,8 +18,13 @@ export default async function Projekte() {
         <Card padding="none">
           <EmptyState
             title="Noch keine Projekte"
-            text="Lege ein Projekt an. Aufgaben, Verantwortliche und Fälligkeiten kommen dort zusammen."
-            action={<Button href="/projekte/neu">Neues Projekt</Button>}
+            text="Starte mit einer Vorlage für ein typisches Agenturprojekt oder lege ein leeres Projekt an."
+            action={
+              <div className="row" style={{ justifyContent: "center" }}>
+                <Button href="/projekte/vorlage">Mit Vorlage starten</Button>
+                <Button variant="ghost" href="/projekte/neu">Leeres Projekt</Button>
+              </div>
+            }
           />
         </Card>
       </>
@@ -34,7 +39,12 @@ export default async function Projekte() {
       <PageHeader
         title="Projekte"
         lede={`${plural(liste.length, "Projekt", "Projekte")}, ${laufend} laufen · ${plural(offen, "offene Aufgabe", "offene Aufgaben")}`}
-        actions={<Button href="/projekte/neu">Neues Projekt</Button>}
+        actions={
+          <>
+            <Button variant="ghost" href="/projekte/vorlage">Mit Vorlage</Button>
+            <Button href="/projekte/neu">Neues Projekt</Button>
+          </>
+        }
       />
       <div className="grid-3">
         {liste.map((p) => {

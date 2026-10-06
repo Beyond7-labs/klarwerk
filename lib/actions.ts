@@ -32,6 +32,7 @@ import {
 } from "@/lib/auth";
 import { projektGehoertZuMandant } from "@/lib/data";
 import { heuteISO, slugify } from "@/lib/format";
+import { vorlageFinden } from "@/lib/vorlagen";
 
 const DEMO_EMAIL = "tessa.mahler@agentur-nordlicht.de";
 
@@ -298,6 +299,37 @@ export async function projektAnlegen(fd: FormData) {
       endeAm: text(fd, "endeAm") || null,
     })
     .returning({ id: projekte.id });
+
+  revalidatePath("/projekte");
+  redirect(`/projekte/${projekt.id}`);
+}
+
+/** Projekt aus einer Vorlage: Beispielaufgaben in „Offen", die Phase als Etikett. */
+export async function projektAusVorlage(fd: FormData) {
+  const s = await sitzungErforderlich();
+  const vorlage = vorlageFinden(text(fd, "vorlage"));
+  if (!vorlage) mitFehler("/projekte/vorlage", "Wähl eine Vorlage aus.");
+
+  const [projekt] = await db
+    .insert(projekte)
+    .values({
+      mandantId: s.mandant.id,
+      name: text(fd, "name") || vorlage.titel,
+      typ: vorlage.typ,
+      startAm: heuteISO(),
+    })
+    .returning({ id: projekte.id });
+
+  const zeilen = vorlage.phasen.flatMap((p) => p.aufgaben.map((titel) => ({ titel, tag: p.name })));
+  await db.insert(aufgaben).values(
+    zeilen.map((z, i) => ({
+      projektId: projekt.id,
+      titel: z.titel,
+      tag: z.tag,
+      spalte: "offen" as Spalte,
+      position: i + 1,
+    })),
+  );
 
   revalidatePath("/projekte");
   redirect(`/projekte/${projekt.id}`);
